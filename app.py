@@ -13,7 +13,9 @@ PITCHER_KEYS = ["球威", "制球", "変化", "コマンド"]
 st.set_page_config(page_title="選手能力 自動計算", page_icon="⚾", layout="wide")
 st.title("⚾ 選手能力 自動計算")
 st.caption("画像アップロード → AI読み取り → 手修正 → スキル/補正込み能力を比較")
-
+player_type = st.radio("選手タイプ", ["野手", "投手"])
+selected_keys = BATTER_KEYS if player_type == "野手" else PITCHER_KEYS
+STAT_KEYS = selected_keys
 
 def blank_player() -> Dict[str, Any]:
     return {
