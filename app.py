@@ -66,7 +66,7 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
                 break
 
     for item in data.get("edition_effects", []) or []:
-        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in BATTER_KEYS}
+        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in STAT_KEYS}
         player["edition_effects"].append({
             "name": str(item.get("name") or ""),
             "condition": str(item.get("condition") or "常時"),
@@ -75,7 +75,7 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
         })
 
     for item in data.get("skills", []) or []:
-        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in BATTER_KEYS}
+        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in STAT_KEYS}
         player["skills"].append({
             "name": str(item.get("name") or ""),
             "condition": str(item.get("condition") or "常時"),
