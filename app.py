@@ -77,7 +77,7 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
         })
 
     for item in data.get("skills", []) or []:
-        effect_keys = BATTER_KEYS if player_type == "野手" else PITCHER_KEYS
+    　　effect_keys = BATTER_KEYS if player_type == "野手"
     　  effect = {k: to_int((item.get("effect") or {}).get(k)) for k in effect_keys}
         player["skills"].append({
             "name": str(item.get("name") or ""),
