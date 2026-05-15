@@ -7,7 +7,8 @@ import streamlit as st
 from PIL import Image
 from google import genai
 
-STAT_KEYS = ["パワー", "ミート", "選球", "忍耐"]
+BATTER_KEYS = ["パワー", "ミート", "選球", "忍耐"]
+PITCHER_KEYS = ["球威", "制球", "変化", "コマンド"]
 
 st.set_page_config(page_title="選手能力 自動計算", page_icon="⚾", layout="wide")
 st.title("⚾ 選手能力 自動計算")
@@ -17,7 +18,7 @@ st.caption("画像アップロード → AI読み取り → 手修正 → スキ
 def blank_player() -> Dict[str, Any]:
     return {
         "player_name": "",
-        "base": {k: 0 for k in STAT_KEYS},
+        "base": {},
         "edition_effects": [],
         "skills": [],
         "notes": "",
@@ -59,7 +60,7 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
                 break
 
     for item in data.get("edition_effects", []) or []:
-        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in STAT_KEYS}
+        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in BATTER_KEYS}
         player["edition_effects"].append({
             "name": str(item.get("name") or ""),
             "condition": str(item.get("condition") or "常時"),
@@ -68,7 +69,7 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
         })
 
     for item in data.get("skills", []) or []:
-        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in STAT_KEYS}
+        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in BATTER_KEYS}
         player["skills"].append({
             "name": str(item.get("name") or ""),
             "condition": str(item.get("condition") or "常時"),
