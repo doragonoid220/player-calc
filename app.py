@@ -115,8 +115,7 @@ JSON形式:
   "skills": [
     {"name": "スキル名", "condition": "発動条件", "enabled_default": true, "effect": {"パワー": 0, "ミート": 0, "選球": 0, "忍耐": 0}}
   ],
-  "notes": "読み取り上の注意"
-}
+  "notes": "読み取り上の注意"}
 """
     contents = [prompt] + images
     response = client.models.generate_content(model="gemini-2.5-flash", contents=contents)
