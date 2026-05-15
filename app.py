@@ -64,10 +64,9 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
             if k in base:
                 player["base"][jp] = to_int(base.get(k))
                 break
-
     for item in data.get("edition_effects", []) or []:
-   　 effect_keys = BATTER_KEYS if player_type == "野手" else PITCHER_KEYS
-    　effect = {k: to_int((item.get("effect") or {}).get(k)) for k in effect_keys}
+        effect_keys = BATTER_KEYS if player_type == "野手" else PITCHER_KEYS
+        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in effect_keys}
 
         player["edition_effects"].append({
             "name": str(item.get("name") or ""),
@@ -77,14 +76,16 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
         })
 
     for item in data.get("skills", []) or []:
-    　　effect_keys = BATTER_KEYS if player_type == "野手"
-    　  effect = {k: to_int((item.get("effect") or {}).get(k)) for k in effect_keys}
+        effect_keys = BATTER_KEYS if player_type == "野手" else PITCHER_KEYS
+        effect = {k: to_int((item.get("effect") or {}).get(k)) for k in effect_keys}
+
         player["skills"].append({
             "name": str(item.get("name") or ""),
             "condition": str(item.get("condition") or "常時"),
             "enabled_default": bool(item.get("enabled_default", True)),
             "effect": effect,
         })
+    
 
     player["notes"] = str(data.get("notes") or "")
     return player
