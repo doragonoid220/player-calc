@@ -50,10 +50,14 @@ def ensure_player_shape(data: Dict[str, Any]) -> Dict[str, Any]:
     base = data.get("base") or {}
     # 英語キーにも対応
     aliases = {
-        "パワー": ["パワー", "power"],
-        "ミート": ["ミート", "meet", "contact"],
-        "選球": ["選球", "eye", "plate_discipline"],
-        "忍耐": ["忍耐", "patience"],
+    "パワー": ["パワー", "power"],
+    "ミート": ["ミート", "meet", "contact"],
+    "選球": ["選球", "eye", "plate_discipline"],
+    "忍耐": ["忍耐", "patience"],
+    "球威": ["球威", "velocity", "stuff"],
+    "制球": ["制球", "control"],
+    "変化": ["変化", "breaking"],
+    "コマンド": ["コマンド", "command"],
     }
     for jp, keys in aliases.items():
         for k in keys:
@@ -104,7 +108,7 @@ def call_gemini(images: List[Image.Image]) -> Dict[str, Any]:
 JSON形式:
 {
   "player_name": "選手名",
-  "base": {"パワー": 0, "ミート": 0, "選球": 0, "忍耐": 0},
+  "base": {"球威": 0, "制球": 0, "変化": 0, "コマンド": 0},
   "edition_effects": [
     {"name": "効果名", "condition": "発動条件", "enabled_default": true, "effect": {"パワー": 0, "ミート": 0, "選球": 0, "忍耐": 0}}
   ],
