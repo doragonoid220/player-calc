@@ -238,11 +238,24 @@ else:
     c1, c2, c3 = st.columns(3)
     c4, c5 = st.columns(2)
 
+    else:
+    c1, c2, c3 = st.columns(3)
+    c4, c5 = st.columns(2)
+
     stats["防御率"] = c1.text_input("防御率", value="", placeholder="1.80")
     stats["奪三振"] = c2.number_input("奪三振", value=0, step=1)
-    stats["WHIP"] = c3.text_input("WHIP", value="", placeholder="0.90")
-    stats["被打率"] = c4.text_input("被打率", value="", placeholder=".210")
-    stats["投球回"] = c5.text_input("投球回", value="", placeholder="120.1")
+    stats["投球回"] = c3.text_input("投球回", value="", placeholder="120.1")
+    hits_allowed = c4.number_input("被安打", value=0, step=1)
+    walks_allowed = c5.number_input("与四球", value=0, step=1)
+
+    try:
+        innings = float(stats["投球回"])
+        stats["WHIP"] = round((hits_allowed + walks_allowed) / innings, 3) if innings > 0 else ""
+    except Exception:
+        stats["WHIP"] = ""
+
+    stats["被安打"] = hits_allowed
+    stats["与四球"] = walks_allowed
 final = calc_total(base, all_effects)
 
 st.divider()
