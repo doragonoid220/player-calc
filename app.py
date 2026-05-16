@@ -134,7 +134,7 @@ JSON形式:
 def calc_total(base: Dict[str, int], effects: List[Dict[str, Any]]) -> Dict[str, int]:
     result = {k: to_int(base.get(k)) for k in STAT_KEYS}
     for e in effects:
-        if not e.get("enabled", False):
+        if not e.get("enabled", e.get("enabled_default", True)):
             continue
         effect = e.get("effect") or {}
         for k in STAT_KEYS:
