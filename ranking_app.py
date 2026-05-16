@@ -109,11 +109,11 @@ if uploaded_files:
                     st.json(result)
                     for item in result:
                         sheet.append_row([
-                            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                            item["rank"],
-                            item["player_name"],
-                            item["club_name"],
-                            item["ranking_ovr"]
+    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    item["player_name"],
+    item["club_name"],
+    item["ranking_ovr"]
+])
                         ])
 
                     st.success("Google Sheets保存完了")
