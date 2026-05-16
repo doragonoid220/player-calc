@@ -42,7 +42,7 @@ def extract_ranking(image):
 - 順位
 - プレイヤー名
 - クラブ名
-- OVR
+- ランキングのOVR
 
 JSON配列のみで返してください。
 
@@ -52,7 +52,7 @@ JSON配列のみで返してください。
     "rank": 1,
     "player_name": "名前",
     "club_name": "クラブ名",
-    "ovr": 14450
+    "ranking_ovr": 14450
   }
 ]
 """
