@@ -55,7 +55,6 @@ def extract_ranking(image):
 
 以下を抽出してください。
 
-- 順位
 - プレイヤー名
 - クラブ名
 - ランキングのOVR
