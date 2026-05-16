@@ -23,6 +23,19 @@ uploaded_files = st.file_uploader(
 client = genai.Client(
     api_key=st.secrets["RANKING_GEMINI_API_KEY"]
 )
+SCOPES = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+
+creds = Credentials.from_service_account_file(
+    "credentials.json",
+    scopes=SCOPES
+)
+
+gc = gspread.authorize(creds)
+
+sheet = gc.open("ranking_records").sheet1
 
 
 def resize_image(image, max_width=1200):
@@ -94,6 +107,15 @@ if uploaded_files:
                     result = extract_ranking(image)
                     st.success("解析成功")
                     st.json(result)
+                    for item in result:
+                        sheet.append_row([
+                            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                            item["rank"],
+                            item["player_name"],
+                            item["club_name"],
+                            item["ranking_ovr"]
+                        ])
 
+                    st.success("Google Sheets保存完了")
                 except Exception as e:
                     st.error(str(e))
