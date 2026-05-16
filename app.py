@@ -170,7 +170,9 @@ with st.sidebar:
     if st.button("比較表をリセット"):
         st.session_state.compare_rows = []
         st.success("リセットしました")
-
+if st.button("現在の読み取り結果をクリア"):
+    st.session_state.player = blank_player()
+    st.rerun()
 uploaded_files = st.file_uploader(
     "能力画面・スキル画面・エディション画面をアップロード（複数可）",
     type=["png", "jpg", "jpeg"],
