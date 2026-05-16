@@ -112,7 +112,6 @@ if uploaded_files:
     item["player_name"],
     item["club_name"],
     item["ranking_ovr"]
-])
                         ])
 
                     st.success("Google Sheets保存完了")
