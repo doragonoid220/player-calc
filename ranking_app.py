@@ -3,6 +3,9 @@ import json
 import streamlit as st
 from PIL import Image
 from google import genai
+import gspread
+from google.oauth2.service_account import Credentials
+from datetime import datetime
 
 st.set_page_config(
     page_title="ランキング分析",
