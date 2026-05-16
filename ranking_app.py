@@ -21,6 +21,18 @@ client = genai.Client(
     api_key=st.secrets["RANKING_GEMINI_API_KEY"]
 )
 
+
+def resize_image(image, max_width=1200):
+    image = image.convert("RGB")
+    width, height = image.size
+
+    if width > max_width:
+        new_height = int(height * max_width / width)
+        image = image.resize((max_width, new_height))
+
+    return image
+
+
 def extract_ranking(image):
     prompt = """
 この画像はランキングチャレンジ画面です。
@@ -51,17 +63,21 @@ JSON配列のみで返してください。
     )
 
     text = response.text.strip()
-
-    text = text.replace("```json", "")
-    text = text.replace("```", "")
+    text = text.replace("```json", "").replace("```", "").strip()
 
     return json.loads(text)
 
 
 if uploaded_files:
-    for file in uploaded_files:
+    st.success(f"{len(uploaded_files)}枚アップロード済み")
 
-        image = Image.open(file)
+    for file in uploaded_files:
+        original_image = Image.open(file)
+        image = resize_image(original_image)
+
+        st.write(f"ファイル名：{file.name}")
+        st.write(f"元サイズ：{original_image.size[0]} x {original_image.size[1]}")
+        st.write(f"軽量化後：{image.size[0]} x {image.size[1]}")
 
         st.image(
             image,
@@ -70,14 +86,10 @@ if uploaded_files:
         )
 
         if st.button(f"{file.name} を解析"):
-
             with st.spinner("Gemini解析中..."):
-
                 try:
                     result = extract_ranking(image)
-
                     st.success("解析成功")
-
                     st.json(result)
 
                 except Exception as e:
