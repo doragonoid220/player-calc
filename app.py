@@ -254,6 +254,7 @@ else:
 
     stats["被安打"] = hits_allowed
     stats["与四球"] = walks_allowed
+    final = calc_total(base, all_effects)
 stats["合計"] = final["合計"]
 
 st.divider()
