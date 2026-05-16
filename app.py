@@ -238,10 +238,6 @@ else:
     c1, c2, c3 = st.columns(3)
     c4, c5 = st.columns(2)
 
-    else:
-    c1, c2, c3 = st.columns(3)
-    c4, c5 = st.columns(2)
-
     stats["防御率"] = c1.text_input("防御率", value="", placeholder="1.80")
     stats["奪三振"] = c2.number_input("奪三振", value=0, step=1)
     stats["投球回"] = c3.text_input("投球回", value="", placeholder="120.1")
