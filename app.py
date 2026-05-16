@@ -224,15 +224,34 @@ with st.expander("手動で効果を追加する"):
         st.rerun()
 
 all_effects = edition_effects + skill_effects
+st.subheader("成績入力")
+
+stats = {}
+
+if player_type == "野手":
+    c1, c2, c3 = st.columns(3)
+    stats["打率"] = c1.text_input("打率", value="", placeholder=".350")
+    stats["本塁打"] = c2.number_input("本塁打", value=0, step=1)
+    stats["OPS"] = c3.text_input("OPS", value="", placeholder="1.000")
+
+else:
+    c1, c2, c3 = st.columns(3)
+    c4, c5 = st.columns(2)
+
+    stats["防御率"] = c1.text_input("防御率", value="", placeholder="1.80")
+    stats["奪三振"] = c2.number_input("奪三振", value=0, step=1)
+    stats["WHIP"] = c3.text_input("WHIP", value="", placeholder="0.90")
+    stats["被打率"] = c4.text_input("被打率", value="", placeholder=".210")
+    stats["投球回"] = c5.text_input("投球回", value="", placeholder="120.1")
 final = calc_total(base, all_effects)
 
 st.divider()
 st.header("最終能力")
-result_df = pd.DataFrame([{"選手名": player_name, **final}])
+result_df = pd.DataFrame([{"選手名": player_name, "タイプ": player_type, **final, **stats}])
 st.dataframe(result_df, use_container_width=True, hide_index=True)
 
 if st.button("現在の選手を比較表に追加", type="primary"):
-    st.session_state.compare_rows.append({"選手名": player_name or "未入力", **final})
+    st.session_state.compare_rows.append({"選手名": player_name or "未入力", "タイプ": player_type, **final, **stats})
     st.success("比較表に追加しました")
 
 if st.session_state.compare_rows:
