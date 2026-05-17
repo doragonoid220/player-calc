@@ -139,11 +139,14 @@ if records:
     st.dataframe(club_count, use_container_width=True)
 
     st.subheader("クラブ別メンバー一覧")
-    for club in club_count["club_name"]:
-        st.markdown(f"### {club}")
-        st.dataframe(
-            df[df["club_name"] == club[["player_name", "ranking_ovr"]],
-            use_container_width=True
-        )
+    st.subheader("クラブ別メンバー一覧")
+
+for club in club_count["club_name"]:
+    st.markdown(f"### {club}")
+
+    st.dataframe(
+        df[df["club_name"] == club][["player_name", "ranking_ovr"]],
+        use_container_width=True
+    )
 else:
     st.info("まだ保存データがありません")
