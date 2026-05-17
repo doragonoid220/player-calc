@@ -145,7 +145,7 @@ if records:
         st.markdown(f"### {club}")
 
         st.dataframe(
-            df[df[" クラブ名 "] == club][[" プレイヤー名 ", "OVR"]],
+            df[df[" クラブ名 "] == club][["プレイヤー名 ", "OVR"]],
             use_container_width=True
         )
 
