@@ -51,25 +51,29 @@ def resize_image(image, max_width=1200):
 
 def extract_ranking(image):
     prompt = """
-この画像はランキングチャレンジ画面です。
+この画像はプロ野球ライジングのユーザー情報画面です。
 
 以下を抽出してください。
 
 - プレイヤー名
 - クラブ名
-- ランキングのOVR
+- ランキングOVR
 
 JSON配列のみで返してください。
 
 形式:
 [
   {
-    "rank": 1,
     "player_name": "名前",
     "club_name": "クラブ名",
-    "ranking_ovr": 14450
+    "ranking_ovr": 14716
   }
 ]
+
+補足:
+・プレイヤー名は上部
+・クラブ名は球団ロゴ横
+・OVRは「ランキング」の行
 """
 
     response = client.models.generate_content(
