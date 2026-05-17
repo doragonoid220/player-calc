@@ -120,34 +120,3 @@ if uploaded_files:
                     st.divider()
 st.subheader("クラブ別一覧・検索")
 
-records = sheet.get_all_records()
-
-if records:
-    import pandas as pd
-
-    df = pd.DataFrame(records)
-    st.write("取得できた列名:", list(pd.DataFrame(records).columns))
-
-    search_club = st.text_input("クラブ名で検索")
-
-    if search_club:
-        df = df[df[" クラブ名 "].astype(str).str.contains(search_club, case=False, na=False)]
-
-    club_count = df.groupby(" クラブ名 ").size().reset_index(name="人数")
-    club_count = club_count.sort_values("人数", ascending=False)
-
-    st.subheader("同クラブ人数")
-    st.dataframe(club_count, use_container_width=True)
-
-    st.subheader("クラブ別メンバー一覧")
-
-    for club in club_count[" クラブ名 "]:
-        st.markdown(f"### {club}")
-
-        st.dataframe(
-            df[df[" クラブ名 "] == club][["プレイヤー名 ", "OVR"]],
-            use_container_width=True
-        )
-
-else:
-    st.info("まだ保存データがありません")
