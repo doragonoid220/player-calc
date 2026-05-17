@@ -59,25 +59,28 @@ def extract_ranking(image):
 - クラブ名
 - ランキングOVR
 
-JSON配列のみで返してください。
+JSONのみで返してください。
 
 形式:
 [
   {
     "player_name": "名前",
     "club_name": "クラブ名",
-    "ranking_ovr": 14716
+    "ranking_ovr": 14314
   }
 ]
 
-ルール:
-・プレイヤー名は最上部の名前
-・クラブ名は右上の青い四角の中の文字のみ
-・GIANTS、Tigersなど中央の大きい球団名は禁止
-・英語の球団ロゴは禁止
+重要ルール:
+・クラブ名は右上の青い四角の中に表示されている文字のみ
+・中央の大きい球団名は禁止
+・GIANTSは禁止
+・Tigersは禁止
 ・Baseball Clubは禁止
-・クラブ名は日本語テキストを優先
+・球団ロゴの英字は禁止
+・クラブ名はユーザーが作成したチーム名
+・クラブ名は短い日本語であることが多い
 ・OVRは「ランキング」の行の数値
+"""
 """
 
     response = client.models.generate_content(
