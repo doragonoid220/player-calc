@@ -131,9 +131,9 @@ if records:
     search_club = st.text_input("クラブ名で検索")
 
     if search_club:
-        df = df[df["クラブ名"].astype(str).str.contains(search_club, case=False, na=False)]
+        df = df[df[" クラブ名 "].astype(str).str.contains(search_club, case=False, na=False)]
 
-    club_count = df.groupby("クラブ名").size().reset_index(name="人数")
+    club_count = df.groupby(" クラブ名 ").size().reset_index(name="人数")
     club_count = club_count.sort_values("人数", ascending=False)
 
     st.subheader("同クラブ人数")
@@ -141,11 +141,11 @@ if records:
 
     st.subheader("クラブ別メンバー一覧")
 
-    for club in club_count["クラブ名"]:
+    for club in club_count[" クラブ名 "]:
         st.markdown(f"### {club}")
 
         st.dataframe(
-            df[df["クラブ名"] == club][["プレイヤー名", "OVR"]],
+            df[df[" クラブ名 "] == club][[" プレイヤー名 ", "OVR"]],
             use_container_width=True
         )
 
