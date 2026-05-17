@@ -126,6 +126,7 @@ if records:
     import pandas as pd
 
     df = pd.DataFrame(records)
+    st.write("取得できた列名:", list(pd.DataFrame(records).columns))
 
     search_club = st.text_input("クラブ名で検索")
 
