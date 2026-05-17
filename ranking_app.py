@@ -81,7 +81,6 @@ JSONのみで返してください。
 ・クラブ名は短い日本語であることが多い
 ・OVRは「ランキング」の行の数値
 """
-"""
 
     response = client.models.generate_content(
         model="gemini-2.5-flash-lite",
